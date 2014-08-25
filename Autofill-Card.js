@@ -10,7 +10,7 @@ $(function(){
   $('input[name$="oneTimePayCurrentBalance"]').click()
   document.getElementById("amt_c").onclick()
   $('input[name$="creditCardName"]').val('First Last')
-  $('[name$="selectedPaymentMethod"]').val('170') // 170 - visa. 180 - mastercard.
+  $('[name$="selectedPaymentMethod"]').val('170') // 170 - visa. 180 - mastercard. 190 - america express. 200 - dicover
   $('input[name$="creditCardNumber"]').val('1234123412341234')
   $('[name$="expiryMonth"]').val('1') // 1 - january. 2 - february. etc. ID of 'select' element, not 0-padded.
   $('[name$="expiryYear"]').val('2000') // standard 4 digits. ID of 'select' element.
