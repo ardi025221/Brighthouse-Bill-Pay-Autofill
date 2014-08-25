@@ -13,7 +13,7 @@ var cc_AMEX = '190';
 var cc_DISCOVER = '200';
 
 credit_card = new Object();
-credit_card.name = 'Stephen Schrauger';
+credit_card.name = 'First Last';
 credit_card.number = '1234123412341234';
 credit_card.payment_method = cc_VISA;
 credit_card.month = '1';
