@@ -2,7 +2,7 @@
 // @name        Autofill Credit Card
 // @namespace   com.schrauger
 // @description Autofills Credit Card Payment
-// @include     https://easypayr.brighthouse.com/res/WSC/PROCESS_SELECT_NEW_MOP
+// @include     https://easypayr.brighthouse.com/res/WSC/*
 // @version     1
 // @grant       none
 // ==/UserScript==
@@ -61,19 +61,37 @@ credit_card = card_a // requires 10 transactions
 //credit_card = card_c // pay remainder of bill (this card has rewards)
 
 $(function(){
-  if (credit_card.type == 'partial'){
-    $('#amt_c').click();
-    document.getElementById("amt_c").onclick(); // this radio button is the 'partial payment' option
-    $('input[name$="amountPayable"]').val('1.0'); // set to one dollar, 0 (10-cents).
-    $('input[name$="amountPayable"]').focus();
-    $('input[name$="amountPayable"]')[0].setSelectionRange(3,3); // set the focus to payment amount and put the cursor at the end
-  } else if (credit_card.type == 'remainder'){
-    $('#amt_a').click();
-    document.getElementById("amt_a").onclick(); // this radio button is the 'remaining balance' option
+  if (window.location.pathname == "/res/WSC/Payments"){
+    // Initial window. Auto click 'one-time payment'
+    jQuery('.twoButtons a.makeAOneTime')[0].click();
   }
-  $('input[name$="creditCardName"]').val(credit_card.name);
-  $('[name$="selectedPaymentMethod"]').val(credit_card.payment_method);
-  $('input[name$="creditCardNumber"]').val(credit_card.number);
-  $('[name$="expiryMonth"]').val(credit_card.month); // 1 - january. 2 - february. etc. ID of 'select' element, not 0-padded.
-  $('[name$="expiryYear"]').val(credit_card.year); // standard 4 digits. ID of 'select' element.
+  if (window.location.pathname == "/res/WSC/SELECT_NEW_MOP"){
+    // Payment type. Auto select 'credit card/debit card'
+    jQuery('[name="selectedPaymentClass"]').val('C').trigger('change');
+  }
+  
+  if (window.location.pathname == "/res/WSC/PROCESS_SELECT_NEW_MOP"){
+    // actual payment screen. fill all info, and wait for user
+    // to fill in remaining information.
+    if (credit_card.type == 'partial'){
+      $('#amt_c').click();
+      document.getElementById("amt_c").onclick();
+      $('input[name$="amountPayable"]').val('1.0'); // set to one dollar, 0 (10-cents).
+      $('input[name$="amountPayable"]').focus();
+      $('input[name$="amountPayable"]')[0].setSelectionRange(3,3); // set the focus to payment amount and put the cursor at the end
+    } else if (credit_card.type == 'remainder'){
+      $('#amt_a').click();
+      document.getElementById("amt_a").onclick();
+    }
+    $('input[name$="creditCardName"]').val(credit_card.name);
+    $('[name$="selectedPaymentMethod"]').val(credit_card.payment_method);
+    $('input[name$="creditCardNumber"]').val(credit_card.number);
+    $('[name$="expiryMonth"]').val(credit_card.month); // 1 - january. 2 - february. etc. ID of 'select' element, not 0-padded.
+    $('[name$="expiryYear"]').val(credit_card.year); // standard 4 digits. ID of 'select' element.
+  }
+  if (window.location.pathname == "/res/WSC/PREVIEW_ONE_TIME_CC"){
+    // Highlight the submit button. Let the user look over the
+    // final info and be able to press enter.
+    jQuery('#submit_btn').focus();
+  }
 })
