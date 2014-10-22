@@ -3,7 +3,7 @@
 // @namespace   com.schrauger
 // @description Autofills Credit Card Payment
 // @include     https://easypayr.brighthouse.com/res/WSC/*
-// @version     1
+// @version     1.2
 // @grant       none
 // ==/UserScript==
 
