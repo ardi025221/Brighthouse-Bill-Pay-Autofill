@@ -82,6 +82,7 @@ $(function(){
     } else if (credit_card.type == 'remainder'){
       $('#amt_a').click();
       document.getElementById("amt_a").onclick();
+      jQuery('#submit_btn').focus();
     }
     $('input[name$="creditCardName"]').val(credit_card.name);
     $('[name$="selectedPaymentMethod"]').val(credit_card.payment_method);
@@ -93,5 +94,10 @@ $(function(){
     // Highlight the submit button. Let the user look over the
     // final info and be able to press enter.
     jQuery('#submit_btn').focus();
+  }
+  if (window.location.pathname == "/res/WSC/PROCESS_PAY_ONLINE_CC"){
+    // Payment complete. Highlight the 'bill pay' link if the user
+    // wants to make another payment.
+    jQuery('#navItem2').focus();
   }
 })
