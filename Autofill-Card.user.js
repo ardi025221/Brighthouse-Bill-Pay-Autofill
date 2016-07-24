@@ -1,11 +1,20 @@
 // ==UserScript==
 // @name        Autofill Credit Card
 // @namespace   com.schrauger
+// @author Stephen Schrauger
 // @description Autofills Credit Card Payment
+// @homepage https://github.com/schrauger/mint.com-customize-default-categories
 // @include     https://easypayr.brighthouse.com/res/WSC/*
 // @version     1.2
 // @grant       none
+// @include https://*.mint.com/*
+// @version 1.3.4
+// @grant none
+// @downloadURL https://raw.githubusercontent.com/schrauger/Brighthouse-Bill-Pay-Autofill/master/Autofill-Card.user.js
+// @updateURL   https://raw.githubusercontent.com/schrauger/Brighthouse-Bill-Pay-Autofill/master/Autofill-Card.user.js
 // ==/UserScript==
+/*jslint browser: true*/
+/*global jQuery*/
 
 // How to use:
 // Fill in the credit card information. If you have multiple cards,
